@@ -1,0 +1,9 @@
+ All Books
+<% num = 0 %>
+<% @books.each do |book| %>
+<% num += 1 %>
+BOOK <%= num %>
+Book Title:<%= book.title %>
+Book Author:<%= book.author %>
+
+<% end %>

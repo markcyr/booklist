@@ -4,15 +4,14 @@ require 'csv'
 
 class Book < ActiveRecord::Base
   # This method is used to create a CSV representation of the data in the database
-  def self.generate_csv(book_list)
-    header = ['id', 'title', 'author', 'already_read']
+  # attr_accessible :name, :price, :released_on
 
-    CSV.generate(headers: true) do |csv|
-      csv << header
-
-      book_list.each do |book|
-        csv << [book.id, book.title, book.author, book.already_read]
+    def self.to_csv
+      CSV.generate do |csv|
+        csv << column_names
+        all.each do |book|
+          csv << book.attributes.values_at(*column_names)
+        end
       end
     end
-  end
 end
